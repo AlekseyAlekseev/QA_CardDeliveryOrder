@@ -1,7 +1,5 @@
 package ru.netology.web;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 
@@ -9,7 +7,8 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -25,13 +24,11 @@ public class CardDeliveryTest {
     @Test
     public void shouldRegByAccount() {
 
-        Configuration.holdBrowserOpen = true;
-
-        String planningDate = generateDate(10);
+        String planningDate = generateDate(3);
 
         open("http://localhost:9999/");
         $("[data-test-id=city] input").setValue("Волгоград");
-        $("[data-test-id=date] input").doubleClick().sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").setValue(planningDate);
         $("[data-test-id=name] input").setValue("Володин Евгений");
         $("[data-test-id=phone] input").setValue("+79218032784");
